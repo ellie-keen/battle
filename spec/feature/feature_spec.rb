@@ -22,16 +22,22 @@ feature Battle do
 
   feature 'when attacking player' do
     scenario 'should get confirmation' do
-      sign_in_and_play
-      click_link('Nipple Cripple')
+      sign_in_and_attack
       expect(page).to have_content('You squeezed them raw!')
     end
 
     scenario 'should reduce health' do
-      sign_in_and_play
-      click_link('Nipple Cripple')
+      sign_in_and_attack
       click_link('Release the Nips')
       expect(page).to have_content "#{name_2} hit points: #{reduced_hit_points}"
     end
+
+    scenario 'swap players and attack player 1' do
+      sign_in_and_attack
+      click_link('Release the Nips')
+      attack
+      expect(page).to have_content "#{name_1} hit points: #{reduced_hit_points}"
+    end
+
   end
 end

@@ -17,6 +17,7 @@ class Battle < Sinatra::Base
     @player_1 = Player.new(params[:player_name_1])
     @player_2 = Player.new(params[:player_name_2])
     $game = Game.new(@player_1, @player_2)
+    
     redirect '/play'
   end
 
@@ -30,7 +31,8 @@ class Battle < Sinatra::Base
   end
 
   get '/cripplethem' do
-    $game.attack($game.player_2)
+    $game.attack($game.current_player)
+    $game.switch_player
 
     erb :cripplethem
   end
