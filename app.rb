@@ -7,8 +7,6 @@ class Battle < Sinatra::Base
   enable :sessions
   set :session_secret, "Our secret session"
 
-
-
   get '/' do
     erb(:index)
   end
@@ -17,7 +15,7 @@ class Battle < Sinatra::Base
     @player_1 = Player.new(params[:player_name_1])
     @player_2 = Player.new(params[:player_name_2])
     $game = Game.new(@player_1, @player_2)
-    
+
     redirect '/play'
   end
 
